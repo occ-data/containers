@@ -27,8 +27,6 @@ else
 	echo "/a2install folder already exists!"
 endif
 
-
-
 echo "=================================================================================="
 echo "Copying the AWIPS-2 16.2.2 repo"
 echo "=================================================================================="
@@ -37,15 +35,6 @@ cd $awipstarget
 
 tar xvfz $mydir/a2update_16_2_2.tgz
 
-if (-d $awipstarget/FSI_install) then
-       rm -rf $awipstarget/FSI_install
-endif
-
-tar xvfz $mydir/FSI_install.tgz
-
-chown -R root:root a2update_16_2_2
-chown -R root:root FSI_install
-
 #Moving the repo file into the yum.repos.d folder
 
 if (-f /etc/yum.repos.d/awips2update.repo) then
@@ -53,7 +42,6 @@ if (-f /etc/yum.repos.d/awips2update.repo) then
 endif
 
 cp a2update_16_2_2/awips2update.repo /etc/yum.repos.d/.
-
 
 echo "=================================================================================="
 echo "Installing 16.2.2 AWIPS-2"
@@ -68,7 +56,6 @@ echo "Changing directory permissions"
 chown -R awips:fxalpha /awips2
 echo "Change Complete"
 
-
 echo "Installing Probsevere and Tracking Meteogram Features"
 
 /awips2/cave/caveInstall.sh /a2install/a2update_16_2_2/awips2/eclipse-repository/ edu.wisc.ssec.cimss.viz.convectprob.feature
@@ -79,7 +66,6 @@ echo "Installing Probsevere and Tracking Meteogram Features"
 /awips2/cave/caveInstall.sh /a2install/a2update_16_2_2/awips2/eclipse-repository/ com.raytheon.uf.viz.satellite.goesr.feature
 /awips2/cave/caveInstall.sh /a2install/a2update_16_2_2/awips2/eclipse-repository/ com.raytheon.uf.viz.dataplugin.nswrc.feature
 /awips2/cave/caveInstall.sh /a2install/a2update_16_2_2/awips2/eclipse-repository/ com.raytheon.uf.viz.ohd.feature
-
 
 
 echo "Checking for 16.2.2 NSHARP cave.ini parameter"
