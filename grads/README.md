@@ -40,4 +40,4 @@ docker exec -ti grads grads -lb
 ```
 
 This should have saved a geotiff called gradsgeo.tif which you can then plot with your favorite GIS software to produce something like this.
-![Example 2-m Temperature Output](/2m-temp.png?raw=true "Example 2-m Temperature Output")
+![Example 2-m Temperature Output](/grads/2m-temp.png?raw=true "Example 2-m Temperature Output")
