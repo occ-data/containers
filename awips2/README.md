@@ -7,7 +7,7 @@ This container installs the visualization portion of the Advanced Weather Intera
 The tarbar with the RPMs is currently not provided.
 
 Build with
-``
+```
 docker build -t awips2 .
 ```
 
