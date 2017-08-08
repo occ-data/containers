@@ -1,4 +1,4 @@
-![MPAS Logo](/mpas.png?raw=true "MPAS Logo")
+![MPAS Logo](/mpas/mpas.png?raw=true "MPAS Logo")
 
 MPAS-Container
 ===
