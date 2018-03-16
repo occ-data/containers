@@ -6,8 +6,9 @@ RUN apt-get update && \
 RUN npm install -g configurable-http-proxy && \
     pip3 install --no-cache-dir \
                  notebook \
-                 jupyterhub==0.8.1 \
-                 jupyterhub-kubespawner==0.7.1 \
-                 jhub_remote_user_authenticator
+                 jupyterhub==0.8.* \
+                 jupyterhub-kubespawner==0.8.1 \
+                 jhub_remote_user_authenticator \
+                 pycurl==7.43.0
 
 ENTRYPOINT jupyterhub
