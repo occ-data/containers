@@ -5,11 +5,11 @@ COPY . /installfiles
 WORKDIR /installfiles
 RUN groupadd -r fxalpha \
 	&& useradd --no-log-init -r -g fxalpha awips \
+	&& yum install -y epel-release \
 	&& yum update -y && yum install -y \
 	apr-util-ldap \
 	bc \
 	boost \
-	compat-db47 \
 	compat-libf2c-34 \
 	csh \
 	gcc-gfortran \
@@ -22,19 +22,20 @@ RUN groupadd -r fxalpha \
 	mailcap \
 	mesa-utils \
 	mesa-libGL-devel \
+	netcdf-devel \
 	openmotif \
 	pcre \
 	system-logos \
 	unzip \
+	wget \
 	wxGTK \
-	wxGTK.i686 \
 	wxGTK-devel \
 	zenity \
 	zlib \
 	zlib.i686 \
 	&& yum clean all \
-	&& chmod +x ./installA2.csh \
-	&& ./installA2.csh \
+	&& chmod +x ./installCAVE.sh \
+	&& ./installCAVE.sh \
 	&& cd \
 	&& rm -rf /installfiles \
 	&& mkdir /home/awips \
