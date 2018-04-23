@@ -40,3 +40,6 @@ RUN conda config --system --append channels r && \
     fix-permissions /home/$NB_USER
 
 RUN echo "source('https://www.bioconductor.org/biocLite.R'); biocLite('maftools')" | R --no-save
+RUN echo "load.lib<-c('httr','jsonlite','dplyr','gplots','RColorBrewer','xml2','repr','VennDiagram'); install.lib<-load.lib[!load.lib %in% installed.packages()]; for(lib in install.lib) install.packages(lib,dependences=TRUE)" | R --no-save
+
+COPY custom/custom.css /home/$NB_USER/.jupyter/custom/custom.css
