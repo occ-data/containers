@@ -35,6 +35,9 @@ RUN conda config --system --append channels r && \
     'r-crayon' \
     'r-randomforest' \
     'r-rmysql' && \
+    'r-dplyr' && \
+    'r-xml2' && \
+    'r-VennDiagram'
     conda clean -tipsy && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
