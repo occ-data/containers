@@ -35,7 +35,9 @@ RUN conda config --system --append channels r && \
     'r-crayon' \
     'r-randomforest' \
     'r-rmysql' && \
-    conda clean -tipsy && \
+    conda install --yes -c r 'r-gplots' 'r-gtools' 'r-catools' \
+    && conda install --yes -c bioconda 'r-venndiagram' \
+    && conda clean -tipsy && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
