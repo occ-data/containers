@@ -19,7 +19,7 @@ USER $NB_UID
 RUN conda config --system --append channels r && \
     conda install --quiet --yes \
     'rpy2' \
-    'r-base=3.4.1' \
+    'r-base=3.4.3' \
     'r-irkernel' \
     'r-plyr' \
     'r-devtools' \
@@ -40,6 +40,6 @@ RUN conda config --system --append channels r && \
     fix-permissions /home/$NB_USER
 
 RUN echo "source('https://www.bioconductor.org/biocLite.R'); biocLite('maftools')" | R --no-save
-RUN echo "load.lib<-c('httr','jsonlite','dplyr','gplots','RColorBrewer','xml2','repr','VennDiagram'); install.lib<-load.lib[!load.lib %in% installed.packages()]; for(lib in install.lib) install.packages(lib,dependences=TRUE, repos='http://cran.us.r-project.org')" | R --no-save
+RUN echo "load.lib<-c('httr','jsonlite','dplyr','gplots','RColorBrewer','xml2','repr','VennDiagram'); install.lib<-load.lib[!load.lib %in% installed.packages()]; install.packages(install.lib,dependences=TRUE, repos='http://cran.us.r-project.org')" | R --no-save
 
 #COPY custom/custom.css /home/$NB_USER/.jupyter/custom/custom.css
