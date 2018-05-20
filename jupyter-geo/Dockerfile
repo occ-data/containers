@@ -19,6 +19,7 @@ RUN apk --no-cache add \
 	musl-dev \
 	python3 \
 	python3-dev \
+        tini \
 	wget \
 	zlib-dev \
 	&& ln -s /usr/include/locale.h /usr/include/xlocale.h \
@@ -97,12 +98,6 @@ RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include python3 -m pip --no-cache-dir 
         shapely \
 	&& mkdir /notebooks
 
-# Install Tini
-RUN wget --quiet https://github.com/krallin/tini/releases/download/v0.10.0/tini && \
-    echo "1361527f39190a7338a0b434bd8c88ff7233ce7b9a4876f3315c22fce7eca1b0 *tini" | sha256sum -c - && \
-    mv tini /usr/local/bin/tini && \
-    chmod +x /usr/local/bin/tini
-
 # Configure environment
 ENV CONDA_DIR /opt/conda
 ENV PATH /usr/local/bin:$PATH
@@ -123,7 +118,7 @@ EXPOSE 8888
 WORKDIR /home/$NB_USER/work
 
 # Configure container startup
-ENTRYPOINT ["tini", "--"]
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["start-notebook.sh"]
 
 # Add local files as late as possible to avoid cache busting
