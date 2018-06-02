@@ -81,6 +81,7 @@ RUN git clone https://github.com/OSGeo/gdal.git /gdalgit \
 RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include python3 -m pip --no-cache-dir install \
         boto3 \
         cartopy \
+        dask-kubernetes \
         fiona \
         gdal \
         geopandas \
