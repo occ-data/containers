@@ -92,6 +92,7 @@ RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include python3 -m pip --no-cache-dir 
 	notebook \
         pandas \
         pyproj \
+	pystan \
 	requests \
         https://github.com/matplotlib/basemap/archive/v1.1.0.tar.gz \
         scipy \
