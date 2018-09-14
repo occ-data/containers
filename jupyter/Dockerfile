@@ -11,8 +11,8 @@ RUN apt-get update && \
     tzdata \
     gfortran \
     gcc \
-    zlib \
-    zlib-devel && apt-get clean && \
+    zlib1g \
+    zlib1g-dev && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
