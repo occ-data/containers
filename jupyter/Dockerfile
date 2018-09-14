@@ -10,7 +10,9 @@ RUN apt-get update && \
     fonts-dejavu \
     tzdata \
     gfortran \
-    gcc && apt-get clean && \
+    gcc \
+    zlib \
+    zlib-devel && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
