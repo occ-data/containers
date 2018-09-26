@@ -49,6 +49,6 @@ USER root
 COPY resources/templates/ /opt/conda/lib/python3.6/site-packages/notebook/templates
 USER $NB_UID
 
-#COPY resources/custom.js /home/$NB_USER/.jupyter/custom/
+COPY resources/custom.js /home/$NB_USER/.jupyter/custom/
 COPY resources/jupyter_notebook_config.py /home/$NB_USER/.jupyter/tmp.py
 RUN cat /home/$NB_USER/.jupyter/tmp.py >> /home/$NB_USER/.jupyter/jupyter_notebook_config.py && rm /home/$NB_USER/.jupyter/tmp.py
