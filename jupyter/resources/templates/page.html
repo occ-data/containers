@@ -122,6 +122,23 @@ dir="ltr">
   </div>
 </noscript>
 
+<div id="header">
+  <div id="header-container" class="container">
+  <div id="ipython_notebook" class="nav navbar-brand"><a href="{{default_url}}
+    {%- if logged_in and token -%}?token={{token}}{%- endif -%}" title='{% trans %}dashboard{% endtrans %}'>
+      {% block logo %}<img src='{{static_url("base/images/logo.png") }}' alt='Jupyter Notebook'/>{% endblock %}
+  </a></div>
+
+  {% block headercontainer %}
+  {% endblock %}
+  
+  </div>
+  <div class="header-bar"></div>
+
+  {% block header %}
+  {% endblock %}
+</div>
+
 <div id="site">
 {% block site %}
 {% endblock %}
