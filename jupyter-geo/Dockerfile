@@ -19,6 +19,7 @@ RUN apk --no-cache add \
 	musl-dev \
 	python3 \
 	python3-dev \
+        tini \
 	wget \
 	zlib-dev \
 	&& ln -s /usr/include/locale.h /usr/include/xlocale.h \
@@ -80,14 +81,18 @@ RUN git clone https://github.com/OSGeo/gdal.git /gdalgit \
 RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include python3 -m pip --no-cache-dir install \
         boto3 \
         cartopy \
+        dask-kubernetes \
         fiona \
         gdal \
         geopandas \
+        jupyterhub \
+        jupyterlab \
         matplotlib \
         netcdf4 \
 	notebook \
         pandas \
         pyproj \
+	pystan \
 	requests \
         https://github.com/matplotlib/basemap/archive/v1.1.0.tar.gz \
         scipy \
@@ -115,6 +120,7 @@ EXPOSE 8888
 WORKDIR /home/$NB_USER/work
 
 # Configure container startup
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["start-notebook.sh"]
 
 # Add local files as late as possible to avoid cache busting
