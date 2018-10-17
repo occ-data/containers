@@ -100,6 +100,12 @@ RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include python3 -m pip --no-cache-dir 
         shapely \
 	&& mkdir /notebooks
 
+# Install Tini
+RUN wget --quiet https://github.com/krallin/tini/releases/download/v0.10.0/tini && \
+    echo "1361527f39190a7338a0b434bd8c88ff7233ce7b9a4876f3315c22fce7eca1b0 *tini" | sha256sum -c - && \
+    mv tini /usr/local/bin/tini && \
+    chmod +x /usr/local/bin/tini
+
 # Configure environment
 ENV CONDA_DIR /opt/conda
 ENV PATH /usr/local/bin:$PATH
@@ -128,4 +134,9 @@ COPY start.sh /usr/local/bin/
 COPY start-notebook.sh /usr/local/bin/
 COPY start-singleuser.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
+
+COPY resources/custom.js /home/$NB_USER/.jupyter/custom/
+COPY resources/jupyter_notebook_config.py /home/$NB_USER/.jupyter/tmp.py
+RUN cat /home/$NB_USER/.jupyter/tmp.py >> /home/$NB_USER/.jupyter/jupyter_notebook_config.py && rm /home/$NB_USER/.jupyter/tmp.py
+
 USER $NB_USER

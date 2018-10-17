@@ -45,4 +45,10 @@ RUN conda config --system --append channels r && \
 RUN echo "source('https://www.bioconductor.org/biocLite.R'); biocLite('maftools')" | R --no-save
 RUN echo "load.lib<-c('httr','jsonlite','dplyr','gplots','ggplot2','ggpubr','phyloseq','RColorBrewer','xml2','repr','VennDiagram'); install.lib<-load.lib[!load.lib %in% installed.packages()]; install.packages(install.lib,dependencies=TRUE, repos='http://cran.us.r-project.org', type='source')" | R --no-save
 
-#COPY custom/custom.css /home/$NB_USER/.jupyter/custom/custom.css
+USER root
+COPY resources/templates/ /opt/conda/lib/python3.6/site-packages/notebook/templates
+USER $NB_UID
+
+COPY resources/custom.js /home/$NB_USER/.jupyter/custom/
+COPY resources/jupyter_notebook_config.py /home/$NB_USER/.jupyter/tmp.py
+RUN cat /home/$NB_USER/.jupyter/tmp.py >> /home/$NB_USER/.jupyter/jupyter_notebook_config.py && rm /home/$NB_USER/.jupyter/tmp.py
