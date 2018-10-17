@@ -132,3 +132,7 @@ COPY start-notebook.sh /usr/local/bin/
 COPY start-singleuser.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
 USER $NB_USER
+
+COPY resources/custom.js /home/$NB_USER/.jupyter/custom/
+COPY resources/jupyter_notebook_config.py /home/$NB_USER/.jupyter/tmp.py
+RUN cat /home/$NB_USER/.jupyter/tmp.py >> /home/$NB_USER/.jupyter/jupyter_notebook_config.py && rm /home/$NB_USER/.jupyter/tmp.py
