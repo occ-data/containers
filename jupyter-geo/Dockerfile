@@ -11,7 +11,7 @@ RUN apk --no-cache add \
 	gfortran \
 	git \
 	lapack-dev \
-	libffi \
+	libffi-dev \
 	libpng-dev \
 	libstdc++ \
 	linux-headers \
