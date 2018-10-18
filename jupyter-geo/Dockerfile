@@ -18,6 +18,7 @@ RUN apk --no-cache add \
 	m4 \
 	make \
 	musl-dev \
+	openssl-dev \
 	python3 \
 	python3-dev \
         tini \
