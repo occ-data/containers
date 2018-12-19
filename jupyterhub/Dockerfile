@@ -9,7 +9,7 @@ RUN npm install -g configurable-http-proxy && \
                  notebook \
                  jupyterhub==0.9.* \
                  jupyterhub-kubespawner==0.9.* \
-                 git+https://github.com/occ-data/jhub_remote_user_authenticator.git@686ddb8961bc5b8ae7316ed4eecde96c948be461 \
+                 git+https://github.com/occ-data/jhub_remote_user_authenticator.git@c942e51d3efb04492d72be14b7b1e1ef4cfa3df2 \
                  pycurl==7.43.0.1
 
 ADD cull_idle_servers.py /usr/local/bin/cull_idle_servers.py
