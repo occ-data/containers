@@ -1,0 +1,2 @@
+docker run -it --rm -v /Users/xingyankuang/Downloads/docker-freesurfer-master:/input brainlife/freesurfer mri_convert input/sub-01_T1w.nii.gz input/test.mgz
+docker run -it --rm -v /Users/xingyankuang/Downloads/subjectDir:/usr/local/freesurfer/subjects brainlife/freesurfer recon-all -s subj10159 -hippocampal-subfields-T1
