@@ -42,8 +42,8 @@ RUN conda config --system --append channels r && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-RUN echo "source('https://www.bioconductor.org/biocLite.R'); biocLite('maftools')" | R --no-save
-RUN echo "load.lib<-c('httr','jsonlite','dplyr','gplots','ggplot2','ggpubr','phyloseq','RColorBrewer','xml2','repr','VennDiagram'); install.lib<-load.lib[!load.lib %in% installed.packages()]; install.packages(install.lib,dependencies=TRUE, repos='http://cran.us.r-project.org', type='source')" | R --no-save
+RUN echo "source('https://www.bioconductor.org/biocLite.R'); biocLite('maftools', 'phyloseq')" | R --no-save
+RUN echo "load.lib<-c('httr','jsonlite','dplyr','gplots','ggplot2','ggpubr','RColorBrewer','xml2','repr','VennDiagram'); install.lib<-load.lib[!load.lib %in% installed.packages()]; install.packages(install.lib,dependencies=TRUE, repos='http://cran.us.r-project.org', type='source')" | R --no-save
 
 USER root
 COPY resources/templates/ /opt/conda/lib/python3.6/site-packages/notebook/templates
