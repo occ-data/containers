@@ -11,6 +11,7 @@ RUN apt-get update && \
     tzdata \
     gfortran \
     gcc \
+    libssl1.0.0 \
     libcurl4-openssl-dev \
     libssl-dev \
     zlib1g \
