@@ -10,7 +10,11 @@ RUN apt-get update && \
     fonts-dejavu \
     tzdata \
     gfortran \
-    gcc && apt-get clean && \
+    gcc \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    zlib1g \
+    zlib1g-dev && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
