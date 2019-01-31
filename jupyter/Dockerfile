@@ -1,6 +1,6 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/scipy-notebook
+FROM jupyter/scipy-notebook:9e8682c9ea54
 
 USER root
 
@@ -10,7 +10,12 @@ RUN apt-get update && \
     fonts-dejavu \
     tzdata \
     gfortran \
-    gcc && apt-get clean && \
+    gcc \
+    libssl1.0.0 \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    zlib1g \
+    zlib1g-dev && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
@@ -42,8 +47,8 @@ RUN conda config --system --append channels r && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-RUN echo "source('https://www.bioconductor.org/biocLite.R'); biocLite('maftools', 'phyloseq')" | R --no-save
 RUN echo "load.lib<-c('httr','jsonlite','dplyr','gplots','ggplot2','ggpubr','RColorBrewer','xml2','repr','VennDiagram'); install.lib<-load.lib[!load.lib %in% installed.packages()]; install.packages(install.lib,dependencies=TRUE, repos='http://cran.us.r-project.org', type='source')" | R --no-save
+RUN echo "source('https://www.bioconductor.org/biocLite.R'); load.s3<-c('maftools', 'phyloseq', 'DESeq2'); install.s3<-load.s3[!load.s3 %in% installed.packages()]; for(s3 in install.s3) biocLite(s3);" | R --no-save
 
 USER root
 COPY resources/templates/ /opt/conda/lib/python3.6/site-packages/notebook/templates
