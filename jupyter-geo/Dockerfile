@@ -11,14 +11,17 @@ RUN apk --no-cache add \
 	gfortran \
 	git \
 	lapack-dev \
+	libffi-dev \
 	libpng-dev \
 	libstdc++ \
 	linux-headers \
 	m4 \
 	make \
 	musl-dev \
+	openssl-dev \
 	python3 \
 	python3-dev \
+        tini \
 	wget \
 	zlib-dev \
 	&& ln -s /usr/include/locale.h /usr/include/xlocale.h \
@@ -80,9 +83,12 @@ RUN git clone https://github.com/OSGeo/gdal.git /gdalgit \
 RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include python3 -m pip --no-cache-dir install \
         boto3 \
         cartopy \
+        dask-kubernetes \
         fiona \
         gdal \
         geopandas \
+        jupyterhub \
+        jupyterlab \
         matplotlib \
         netcdf4 \
 	notebook \
@@ -94,6 +100,12 @@ RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include python3 -m pip --no-cache-dir 
         scikit-learn \
         shapely \
 	&& mkdir /notebooks
+
+# Install Tini
+RUN wget --quiet https://github.com/krallin/tini/releases/download/v0.10.0/tini && \
+    echo "1361527f39190a7338a0b434bd8c88ff7233ce7b9a4876f3315c22fce7eca1b0 *tini" | sha256sum -c - && \
+    mv tini /usr/local/bin/tini && \
+    chmod +x /usr/local/bin/tini
 
 # Configure environment
 ENV CONDA_DIR /opt/conda
@@ -115,6 +127,7 @@ EXPOSE 8888
 WORKDIR /home/$NB_USER/work
 
 # Configure container startup
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["start-notebook.sh"]
 
 # Add local files as late as possible to avoid cache busting
@@ -122,4 +135,9 @@ COPY start.sh /usr/local/bin/
 COPY start-notebook.sh /usr/local/bin/
 COPY start-singleuser.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh
+
+COPY resources/custom.js /home/$NB_USER/.jupyter/custom/
+COPY resources/jupyter_notebook_config.py /home/$NB_USER/.jupyter/tmp.py
+RUN cat /home/$NB_USER/.jupyter/tmp.py >> /home/$NB_USER/.jupyter/jupyter_notebook_config.py && rm /home/$NB_USER/.jupyter/tmp.py
+
 USER $NB_USER
