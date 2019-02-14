@@ -1,7 +1,8 @@
 FROM python:3.7-stretch
 
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get update && \
-    apt-get install -y npm nodejs-legacy && \
+    apt-get install -y git bzip2 nodejs && \
     rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g configurable-http-proxy && \
