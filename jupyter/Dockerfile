@@ -4,7 +4,7 @@ FROM jupyter/scipy-notebook:9e8682c9ea54
 
 USER root
 
-RUN pip install --upgrade nbconvert=5.4.1
+RUN pip install --upgrade nbconvert==5.4.1
 
 # R pre-requisites
 RUN apt-get update && \
