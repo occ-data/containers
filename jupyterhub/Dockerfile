@@ -9,7 +9,7 @@ RUN npm install -g configurable-http-proxy && \
     pip3 install --no-cache-dir \
                  notebook \
                  jupyterhub-kubespawner==0.9.* \
-                 git+https://github.com/jupyterhub/jupyterhub.git@7c46fe74a50da4badc332ef671954e2fac406757 \
+                 git+https://github.com/jupyterhub/jupyterhub.git@dcdb8d8a89d98cda411f00ac92b99f008ffaefd6 \
                  git+https://github.com/occ-data/jhub_remote_user_authenticator.git@8a46c0565e11dcf43f8b9dcf0a599fc16b69e768 \
                  pycurl==7.43.0.1
 
