@@ -4,6 +4,28 @@ FROM jupyter/scipy-notebook:9e8682c9ea54
 
 USER root
 
+ENV GOPATH /home/$NB_USER/go
+ENV GOROOT /usr/local/go/
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+
+# Install gen3-fuse
+RUN apt-get update \ 
+  && apt-get install -y --no-install-recommends curl tar \
+  && curl -O https://dl.google.com/go/go1.12.linux-amd64.tar.gz \
+  && tar -C /usr/local -xzf go1.12.linux-amd64.tar.gz \
+  && export PATH=$PATH:/usr/local/go/bin \
+  && mkdir $GOPATH && cd $GOPATH && mkdir src \
+  && cd src \
+  && git clone https://github.com/uc-cdis/gen3-fuse.git \
+  && cd gen3-fuse/ && ./build.sh \
+  && chmod 777 gen3fuse \
+  && mv gen3fuse /usr/local/bin/gen3fuse \
+  && export PATH=$PATH:/usr/local/bin/gen3fuse \
+  && echo "export PATH=$PATH:/usr/local/bin/gen3fuse" >> /home/$NB_USER/.bashrc \
+  && rm  -rf $GOPATH && rm /home/$NB_USER/go1.12.linux-amd64.tar.gz \
+  && apt-get remove -y curl \
+  && rm -rf /var/lib/apt/lists/*
+
 RUN pip install --upgrade nbconvert==5.4.1
 
 # R pre-requisites
