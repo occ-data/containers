@@ -13,12 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl tar fuse \
   && curl -O https://dl.google.com/go/go1.12.linux-amd64.tar.gz \
   && tar -C /usr/local -xzf go1.12.linux-amd64.tar.gz \
   && export PATH=$PATH:/usr/local/go/bin \
-  && mkdir $GOPATH && cd $GOPATH && mkdir src \
-  && cd src \
+  && mkdir $GOPATH && cd $GOPATH && mkdir src && cd src \
   && git clone https://github.com/uc-cdis/gen3-fuse.git \
   && cd gen3-fuse/ && git checkout fix/export-to-workspace && git pull origin fix/export-to-workspace \
-  && ./build.sh \
-  && chmod 777 gen3fuse \
+  && ./build.sh && chmod 777 gen3fuse \
   && mv gen3fuse /usr/local/bin/gen3fuse \
   && mv config.yaml /home/$NB_USER/fuse-config.yaml \
   && export PATH=$PATH:/usr/local/bin/gen3fuse \
@@ -28,6 +26,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl tar fuse \
   && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade nbconvert==5.4.1
+
+# TODO!!!
+# Change back the branch on gen3fuse to master
+# And change the gen3sdk branch to master
+
+
+# Install Gen3SDK Python
+RUN ls && ls && ls && pip install https://github.com/uc-cdis/gen3sdk-python/archive/feat/add-mount-manifest-tools.zip
+
 
 # R pre-requisites
 # RUN apt-get update && \
@@ -88,3 +95,9 @@ RUN cat /home/$NB_USER/.jupyter/tmp.py >> /home/$NB_USER/.jupyter/jupyter_notebo
 USER root
 RUN sudo mknod -m 666 /dev/fuse c 10 229 && sudo chmod 777 /dev/fuse && sudo chmod -R 777 /dev/fuse
 CMD sudo chmod 777 /dev/fuse && sudo chmod -R 777 /dev/fuse && start-notebook.sh && su $NB_UID
+
+
+
+
+
+
