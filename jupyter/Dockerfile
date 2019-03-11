@@ -94,7 +94,7 @@ RUN cat /home/$NB_USER/.jupyter/tmp.py >> /home/$NB_USER/.jupyter/jupyter_notebo
 # Notice that we switch back to user $NB_UID at the end of the CMD call, so that the user does not have sudo nor root privileges.
 USER root
 RUN sudo mknod -m 666 /dev/fuse c 10 229 && sudo chmod 777 /dev/fuse && sudo chmod -R 777 /dev/fuse
-CMD sudo chmod 777 /dev/fuse && sudo chmod -R 777 /dev/fuse && start-notebook.sh && su $NB_UID
+CMD sudo chmod 777 /dev/fuse && sudo chmod -R 777 /dev/fuse # && start-notebook.sh && su $NB_UID
 
 
 
