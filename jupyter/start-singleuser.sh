@@ -4,7 +4,7 @@
 
 set -e
 
-sudo chmod 777 /dev/fuse
+chmod 777 /dev/fuse
 
 # set default ip to 0.0.0.0
 if [[ "$NOTEBOOK_ARGS $@" != *"--ip="* ]]; then
