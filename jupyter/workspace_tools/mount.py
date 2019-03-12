@@ -36,7 +36,7 @@ class Gen3Mount:
         >>> g3mount.mount_my_last_export()
     """
 
-    def __init__(self, endpoint, api_key=None, config_yaml_path="/home/jovyan/fuse-config.yaml", wts_url="http://workspace-token-service"):
+    def __init__(self, endpoint, api_key=None, config_yaml_path="/home/jovyan/fuse-config.yaml", wts_url="http://workspace-token-service.default"):
         self.endpoint = endpoint
         self.api_key = api_key
         self.access_token = ""
