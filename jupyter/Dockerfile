@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl tar fuse \
   && echo "export PATH=$PATH:/usr/local/bin/gen3fuse" >> /home/$NB_USER/.bashrc \
   && rm  -rf $GOPATH && rm /home/$NB_USER/go1.12.linux-amd64.tar.gz \
   && apt-get remove -y curl \
-  && rm -rf /var/lib/apt/lists/* && ls
+  && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade nbconvert==5.4.1
 

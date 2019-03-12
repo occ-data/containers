@@ -133,9 +133,9 @@ class Gen3Mount:
         """
         directory_path = "mount-pt-" + datetime.now().isoformat().replace(":", "-")
         if self.api_key:
-            command = "gen3fuse {} {} {} {} {}".format(self.config_yaml_path, filename, directory_path, self.endpoint, self.api_key)
+            command = "gen3fuse {} {} {} {} {} {}".format(self.config_yaml_path, filename, directory_path, self.endpoint, self.wts_url, self.api_key)
         else:
-            command = "gen3fuse {} {} {} {}".format(self.config_yaml_path, filename, directory_path, self.endpoint)
+            command = "gen3fuse {} {} {} {} {}".format(self.config_yaml_path, filename, directory_path, self.endpoint, self.wts_url)
 
         output = subprocess.Popen(command.split(" "), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True).stdout.read()
         if output == '':
