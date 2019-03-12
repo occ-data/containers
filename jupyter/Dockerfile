@@ -15,8 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl tar fuse \
   && export PATH=$PATH:/usr/local/go/bin \
   && mkdir $GOPATH && cd $GOPATH && mkdir src && cd src \
   && git clone https://github.com/uc-cdis/gen3-fuse.git \
-  && cd gen3-fuse/ && git pull origin fix/export-to-workspace \
-  && ./build.sh && chmod 777 gen3fuse \
+  && cd gen3-fuse/ && ./build.sh && chmod 777 gen3fuse \
   && mv gen3fuse /usr/local/bin/gen3fuse \
   && mv config.yaml /home/$NB_USER/fuse-config.yaml \
   && export PATH=$PATH:/usr/local/bin/gen3fuse \
