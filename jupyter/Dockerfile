@@ -28,7 +28,7 @@ ADD workspace_tools /home/$NB_USER/workspace_tools
 
 RUN pip install --upgrade nbconvert==5.4.1
 
-R pre-requisites
+# R pre-requisites
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     fonts-dejavu \
@@ -44,7 +44,7 @@ RUN apt-get update && \
 
 USER $NB_UID
 
-R packages including IRKernel which gets installed globally.
+# R packages including IRKernel which gets installed globally.
 RUN conda config --system --append channels r && \
     conda install --quiet --yes \
     'rpy2' \
