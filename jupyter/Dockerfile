@@ -9,7 +9,7 @@ ENV GOROOT /usr/local/go/
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
 # Install gen3-fuse
-RUN apt-get update && apt-get install -y --no-install-recommends curl tar fuse \
+RUN ls && apt-get update && apt-get install -y --no-install-recommends curl tar fuse \
   && curl -O https://dl.google.com/go/go1.12.linux-amd64.tar.gz \
   && tar -C /usr/local -xzf go1.12.linux-amd64.tar.gz \
   && export PATH=$PATH:/usr/local/go/bin \
