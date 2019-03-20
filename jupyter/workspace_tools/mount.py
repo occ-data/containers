@@ -38,6 +38,8 @@ class Gen3Mount:
 
     def __init__(self, endpoint, api_key=None, config_yaml_path="/home/jovyan/fuse-config.yaml", wts_url="http://workspace-token-service.default"):
         self.endpoint = endpoint
+        if len(endpoint) > 0 and endpoint[-1] != '/':
+            endpoint = endpoint + '/'
         self.api_key = api_key
         self.access_token = ""
         self.wts_url = wts_url
@@ -57,13 +59,15 @@ class Gen3Mount:
             'api_key' : self.api_key
         }
         headers = {'Content-Type': 'application/json', 'Accept':'application/json'}
-        fence_token_url = self.endpoint + "/user/credentials/api/access_token"
+        fence_token_url = self.endpoint + "user/credentials/api/access_token"
+        r_text = ""
         try:
             r = requests.post(fence_token_url, json=data, headers=headers)
+            r_text = r.text
             token = r.json()['access_token']
             return token
         except Exception as e:
-            raise Gen3MountError("Failed to authenticate with {}\n{}\n{}".format(fence_token_url, r.text, str(e)))
+            raise Gen3MountError("Failed to authenticate with {}\n{}\n{}".format(fence_token_url, str(e), r_text))
 
     def _get_access_token_from_wts(self):
         """
@@ -73,12 +77,14 @@ class Gen3Mount:
         Args:
             api_key (str): The user's api key, generated on their identity page.
         """ 
+        r_text = ""
         try:
             r = requests.get(self.wts_url + "/token")
+            r_text = r.text
             token = r.json()["token"]
             return token
         except Exception as e:
-            raise Gen3MountError("Failed to authenticate to {}\n{}".format(self.wts_url, str(e)))
+            raise Gen3MountError("Failed to authenticate with {}\n{}\n{}".format(self.wts_url, str(e), r_text))
 
     def mount_my_last_export(self):
         """
