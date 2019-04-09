@@ -26,7 +26,7 @@ USER $NB_UID
 RUN conda config --system --append channels r && \
     conda install --quiet --yes \
     'rpy2' \
-    'r-base=3.4.3' \
+    'r-base=3.5.1' \
     'r-irkernel' \
     'r-plyr' \
     'r-devtools' \
