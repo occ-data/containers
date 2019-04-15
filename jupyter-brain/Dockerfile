@@ -1,6 +1,6 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/scipy-notebook:9e8682c9ea54
+FROM jupyter/scipy-notebook
 
 USER root
 
