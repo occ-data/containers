@@ -17,6 +17,7 @@ RUN apt-get update && \
     libcurl4-openssl-dev \
     libssl-dev \
     zlib1g \
+    autoconf \
     zlib1g-dev && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -49,6 +50,12 @@ RUN conda config --system --append channels r && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
+USER root
+RUN wget https://github.com/arq5x/lumpy-sv/releases/download/0.3.0/lumpy-sv.tar.gz; \
+    tar -zxvf lumpy-sv.tar.gz lumpy-sv; rm lumpy-sv.tar.gz; \
+    cd lumpy-sv; make; cp bin/* /usr/local/bin/.; \
+    rm -rf data/ src/ .git;
+USER $NB_UID
 
 RUN echo "load.lib<-c('httr','jsonlite','dplyr','gplots','ggplot2','ggpubr','RColorBrewer','xml2','repr','VennDiagram'); install.lib<-load.lib[!load.lib %in% installed.packages()]; install.packages(install.lib,dependencies=TRUE, repos='http://cran.us.r-project.org', type='source')" | R --no-save
 RUN echo "source('https://www.bioconductor.org/biocLite.R'); load.s3<-c('maftools', 'phyloseq', 'DESeq2', 'dada2', 'vcfR'); install.s3<-load.s3[!load.s3 %in% installed.packages()]; for(s3 in install.s3) biocLite(s3);" | R --no-save
