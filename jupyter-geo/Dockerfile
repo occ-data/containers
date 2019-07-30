@@ -27,7 +27,9 @@ RUN apk --no-cache add \
 	&& ln -s /usr/include/locale.h /usr/include/xlocale.h \
 	&& pip3 install --upgrade pip \
 	&& python3 -m pip --no-cache-dir install \
-	numpy
+	numpy \
+	jpeg-dev \
+	zlib-dev
 
 RUN apk --no-cache add \
         --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
