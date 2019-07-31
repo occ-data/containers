@@ -10,6 +10,7 @@ RUN apk --no-cache add \
 	gcc \
 	gfortran \
 	git \
+	jpeg-dev \
 	lapack-dev \
 	libffi-dev \
 	libpng-dev \
@@ -27,9 +28,7 @@ RUN apk --no-cache add \
 	&& ln -s /usr/include/locale.h /usr/include/xlocale.h \
 	&& pip3 install --upgrade pip \
 	&& python3 -m pip --no-cache-dir install \
-	numpy \
-	jpeg-dev \
-	zlib-dev
+	numpy
 
 RUN apk --no-cache add \
         --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
