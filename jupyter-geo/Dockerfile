@@ -30,9 +30,9 @@ RUN apk --no-cache add \
 	&& python3 -m pip --no-cache-dir install \
 	numpy
 
-RUN apk --no-cache add \
+RUN apk add --no-cache --virtual .build-deps-edge \
         --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-        proj4-dev
+        proj-dev
 
 # HDF5 Installation
 RUN wget https://www.hdfgroup.org/package/bzip2/?wpdmdl=4300 \
