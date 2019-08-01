@@ -32,6 +32,8 @@ RUN apk --no-cache add \
 
 RUN apk add --no-cache --virtual .build-deps-edge \
         --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+        proj \
+        proj-util \
         proj-dev
 
 # HDF5 Installation
@@ -81,9 +83,9 @@ RUN git clone https://github.com/OSGeo/gdal.git /gdalgit \
 	&& cd / \
 	&& rm -rf gdalgit
 
-RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include python3 -m pip --no-cache-dir install \
+RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include PROJ_DIR=/usr python3 -m pip --no-cache-dir install \
         boto3 \
-        cartopy \
+        Cython \
         dask-kubernetes \
         fiona \
         gdal \
@@ -101,6 +103,10 @@ RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include python3 -m pip --no-cache-dir 
         scikit-learn \
         shapely \
 	&& mkdir /notebooks
+
+# https://github.com/SciTools/cartopy/pull/1289
+RUN python3 -m pip --no-cache-dir install \
+        git+https://github.com/snowman2/cartopy.git@5e624fe
 
 # Install Tini
 RUN wget --quiet https://github.com/krallin/tini/releases/download/v0.10.0/tini && \
