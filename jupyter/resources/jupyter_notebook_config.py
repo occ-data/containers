@@ -1,6 +1,9 @@
+import os
+import
+
 c.NotebookApp.tornado_settings = {
     'headers': {
         'Content-Security-Policy':
-        'frame-ancestors self https://qa-test4.planx-pla.net'
+        'frame-ancestors self %os.environ['FRAME-ANCESTORS']'
     }
 }
