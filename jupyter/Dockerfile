@@ -28,15 +28,20 @@ RUN apt-get update && \
     fonts-texgyre \
     gfortran \
     gcc \
+    make \
+    automake \
+    perl \
     less \
     locales \
     libssl1.0.0 \
-    libcurl4-openssl-dev \
     libssl-dev \
     tzdata \
     vim \
     zlib1g \
-    zlib1g-dev
+    zlib1g-dev \
+    libbz2-dev \
+    libcurl4-gnutls-dev \
+    liblzma-dev 
     
 ## Now install R and littler, and create a link for littler in /usr/local/bin
 #RUN apt-get update \
