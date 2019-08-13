@@ -108,6 +108,14 @@ RUN HDF5_LIBDIR=/usr/lib HDF5_INCDIR=/usr/include PROJ_DIR=/usr python3 -m pip -
 RUN python3 -m pip --no-cache-dir install \
         git+https://github.com/snowman2/cartopy.git@5e624fe
 
+RUN python3 -m pip --no-cache-dir install \
+        git+https://github.com/matplotlib/basemap.git \
+        seaborn \
+        pandas-summary \
+        google-api-python-client \
+        pyCrypto \
+        earthengine-api
+
 # Install Tini
 RUN wget --quiet https://github.com/krallin/tini/releases/download/v0.10.0/tini && \
     echo "1361527f39190a7338a0b434bd8c88ff7233ce7b9a4876f3315c22fce7eca1b0 *tini" | sha256sum -c - && \
