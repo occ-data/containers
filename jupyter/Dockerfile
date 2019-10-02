@@ -4,7 +4,21 @@ FROM jupyter/scipy-notebook:d4cbf2f80a2a
 
 USER root
 
-RUN pip install --upgrade nbconvert==5.4.1
+# Install pip packages, including gen3sdk
+RUN pip install --upgrade pip && \
+    pip install --upgrade nbconvert==5.4.1 && \
+    pip install --force --upgrade gen3 --ignore-installed certifi && \
+    pip install numpy \
+    awscli \
+    pysam --ignore-installed
+
+# Install latest gen3-client
+RUN curl https://api.github.com/repos/uc-cdis/cdis-data-client/releases/latest | grep browser_download_url.*linux |  cut -d '"' -f 4 | wget -qi - \
+    && unzip dataclient_linux.zip \
+    && rm dataclient_linux.zip \
+    && mkdir .gen3 \
+    && mv gen3-client .gen3 \
+    && PATH=$PATH:/home/jovyan/.gen3 \
 
 #
 # R pre-requisites
