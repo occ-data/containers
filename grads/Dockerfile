@@ -119,14 +119,14 @@ RUN wget http://www.nco.ncep.noaa.gov/pmb/codes/GRIB2/g2clib-1.6.0.tar \
 	&& cd .. \
 	&& rm -rf g2clib-1.6.0 g2clib-1.6.0.tar
 
-RUN wget ftp://ftp-osl.osuosl.org/pub/libpng/src/libpng12/libpng-1.2.57.tar.gz \
-	&& tar xf libpng-1.2.57.tar.gz \
-	&& cd libpng-1.2.57 \
+RUN wget ftp://ftp-osl.osuosl.org/pub/libpng/src/libpng12/libpng-1.2.59.tar.gz \
+	&& tar xf libpng-1.2.59.tar.gz \
+	&& cd libpng-1.2.59 \
 	&& ./configure --prefix=/usr \
 	&& make \
         && make install \
         && cd .. \
-        && rm -rf libpng-1.2.57 libpng-1.2.57.tar.gz
+        && rm -rf libpng-1.2.59 libpng-1.2.59.tar.gz
 
 RUN wget https://github.com/libgd/libgd/archive/gd-2.2.4.tar.gz \
 	&& tar xf gd-2.2.4.tar.gz \
@@ -138,14 +138,14 @@ RUN wget https://github.com/libgd/libgd/archive/gd-2.2.4.tar.gz \
         && cd .. \
         && rm -rf gd-2.2.4.tar.gz libgd-gd-2.2.4
 
-RUN wget ftp://ftp-osl.osuosl.org/pub/libpng/src/libpng15/libpng-1.5.28.tar.gz \
-        && tar xf libpng-1.5.28.tar.gz \
-        && cd libpng-1.5.28 \
+RUN wget ftp://ftp-osl.osuosl.org/pub/libpng/src/libpng15/libpng-1.5.30.tar.gz \
+        && tar xf libpng-1.5.30.tar.gz \
+        && cd libpng-1.5.30 \
         && ./configure --prefix=/usr \
         && make \
         && make install \
         && cd .. \
-        && rm -rf libpng-1.5.28 libpng-1.5.28.tar.gz
+        && rm -rf libpng-1.5.30 libpng-1.5.30.tar.gz
 
 RUN wget http://download.osgeo.org/shapelib/shapelib-1.4.0.tar.gz \
         && tar xf shapelib-1.4.0.tar.gz \
